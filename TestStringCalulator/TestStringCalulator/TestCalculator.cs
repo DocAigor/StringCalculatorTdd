@@ -42,5 +42,18 @@ namespace TestStringCalulator
              var result = calc.Resolve("2,2,3");
              Assert.AreEqual(result, 7);
          }
+
+         [TestCase("2,2,3", 7)]
+         [TestCase("1,2,5", 8)]
+         [TestCase("-2,1,0", -1)]
+         [TestCase("0,0", 0)]
+         [TestCase("-1,-2,-3,0", -6)]
+         public void TestMultipleNumber(string testString,int expected)
+         {
+             var result = calc.Resolve(testString);
+             Assert.AreEqual(result, expected);
+         }
+
+
     }
 }
