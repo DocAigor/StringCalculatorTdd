@@ -8,9 +8,10 @@ namespace StringCalculator
 {
     public class Calculator
     {
-        public object Resolve(string p)
+        public int Resolve(string p)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(p)) return 0;
+            return Int32.Parse(p);
         }
     }
 }
