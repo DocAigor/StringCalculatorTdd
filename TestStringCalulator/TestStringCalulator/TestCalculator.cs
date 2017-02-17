@@ -71,5 +71,17 @@ namespace TestStringCalulator
             moccking.Verify(mock => mock.Save(result), Times.Once);
         }
 
+        [TestCase("2,2,3")]
+        [TestCase("1,2,5")]
+        [TestCase("-2,1,0")]
+        [TestCase("0,0")]
+        [TestCase("-1,-2,-3,0")]
+        public void TestISaveHistoryMultiple(string testString)
+        {
+            Mock<IHistoryCalculator> moccking = new Mock<IHistoryCalculator>();
+            var calc = new Calculator(moccking.Object);
+            var result = calc.Resolve(testString);
+            moccking.Verify(mock => mock.Save(result), Times.Once);
+        }
     }
 }
