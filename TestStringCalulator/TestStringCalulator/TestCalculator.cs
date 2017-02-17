@@ -32,9 +32,15 @@ namespace TestStringCalulator
         [TestCase("4",4)]
         public void TestNumber(string testNumber,int expected)
         {
-            var result = calc.Resolve(string.Empty);
-            Assert.AreEqual(result, 0);
+            var result = calc.Resolve(testNumber);
+            Assert.AreEqual(result, expected);
         }
+
+       /* [Test]
+        public void TestMultipleNumber()
+        {
+            var result=calc.Resolve(
+        }*/
         
     }
 }
