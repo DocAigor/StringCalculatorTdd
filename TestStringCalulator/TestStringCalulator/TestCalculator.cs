@@ -36,11 +36,11 @@ namespace TestStringCalulator
             Assert.AreEqual(result, expected);
         }
 
-       /* [Test]
-        public void TestMultipleNumber()
-        {
-            var result=calc.Resolve(
-        }*/
-        
+         [Test]
+         public void TestMultipleNumber()
+         {
+             var result = calc.Resolve("2,2,3");
+             Assert.AreEqual(result, 7);
+         }
     }
 }
