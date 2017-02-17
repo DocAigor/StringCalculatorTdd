@@ -8,5 +8,9 @@ namespace StringCalculator
 {
     public class Calculator
     {
+        public object Resolve(string p)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
