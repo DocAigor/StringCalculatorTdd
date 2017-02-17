@@ -8,19 +8,40 @@ namespace StringCalculator
 {
     public class Calculator
     {
+        private IHistoryCalculator historyCalculator;
+
+        public Calculator() { }
+
+        public Calculator(IHistoryCalculator historyCalculator)
+        {
+            this.historyCalculator = historyCalculator;
+        }
         public int Resolve(string p)
         {
-            if (string.IsNullOrEmpty(p)) return 0;
+            if (string.IsNullOrEmpty(p))
+            {
+                if (historyCalculator != null) historyCalculator.Save(0);
+                return 0;
+            }
+            var outRes = 0;
             var result = 0;
-            if (p.Contains(",")) {
+            if (p.Contains(","))
+            {
                 var numbers = p.Split(',');
                 foreach (var n in numbers)
                 {
-                    result += int.Parse(n);
+
+                    if (int.TryParse(n, out outRes))
+                        result += outRes;
                 }
+                if (historyCalculator != null) historyCalculator.Save(result);
                 return result;
             }
-            return Int32.Parse(p);
+            if (!int.TryParse(p, out outRes))
+                outRes = 0;
+
+            if (historyCalculator != null) historyCalculator.Save(outRes);
+            return outRes;
         }
     }
 }

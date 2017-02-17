@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Moq;
+using NUnit.Framework;
 using StringCalculator;
 using System;
 using System.Collections.Generic;
@@ -54,6 +55,21 @@ namespace TestStringCalulator
              Assert.AreEqual(result, expected);
          }
 
+        [Test]
+         public void TestMixedString()
+         {
+             var result = calc.Resolve("1,2,a,b,0");
+             Assert.AreEqual(result, 3);
+         }
+
+        [Test]
+        public void TestISaveHistory()
+        {
+            Mock<IHistoryCalculator> moccking = new Mock<IHistoryCalculator>();
+            var calc = new Calculator(moccking.Object);
+            var result = calc.Resolve("1");
+            moccking.Verify(mock => mock.Save(result), Times.Once);
+        }
 
     }
 }
